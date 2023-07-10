@@ -29,7 +29,7 @@ function View()
                 onChange={(event: any) => setFilter(event.target.value)}
             />
             <div className="pt-8 grid xl:grid-cols-5 2xl:grid-cols-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-3">
-                {products?.map((product: any) => <Product key={product.id} product={product} tax={tax} />)}
+                {products?.map((product: any) => <Product key={product.id} product={product} tax={tax} taxId={params.viewId} />)}
             </div>
         </div>
     </div>

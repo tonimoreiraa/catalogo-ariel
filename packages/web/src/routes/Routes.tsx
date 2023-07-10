@@ -4,6 +4,7 @@ import Products from "../pages/Products";
 import { useAuth } from "../contexts/AuthContext";
 import SignIn from "../pages/SignIn";
 import View from "../pages/View";
+import ProductPage from "../pages/Product";
 
 function AppRoutes()
 {
@@ -19,6 +20,7 @@ function AppRoutes()
             <Route path="*" element={<Navigate to="/auth/login" />} />
         </>}
         <Route path="/views/:viewId" element={<View />} />
+        <Route path="/views/:viewId/:productId" element={<ProductPage />} />
     </Routes>
 }
 
