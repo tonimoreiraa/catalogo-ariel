@@ -10,6 +10,7 @@ function View()
     const {data: dolar} = useQuery('@dolar', () => api.get('/dolar'))
     const {data: taxes} = useQuery('@taxes', () => api.get('/taxes'))
     const {data, isLoading} = useQuery('@products', () => api.get('/products'))
+    const {data: lastUpdate} = useQuery('@last-update', () => api.get('/last-update'))
 
     const products = data?.data?.filter((product: any) => {
         const strings = [filter, product.title, product.category.name].map(string => string.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase())
@@ -25,9 +26,19 @@ function View()
             <div className="max-w-[1600px] w-full">
                 <div className="w-full flex items-center justify-between mb-2">
                     <h1 className="font-bold text-2xl">Produtos</h1>
-                    <div className="text-right">
-                        <h1 className="text-green-500 font-semibold text-xs md:text-base">{dolar?.data.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</h1>
-                        <h2 className="text-xs md:text-sm text-green-500 font-light">Câmbio referência</h2>
+                    <div className="flex flex-row gap-3">
+                        <div className="text-right">
+                            <h1 className="text-neutral-600 font-semibold text-xs md:text-base">
+                                {new Date(lastUpdate?.data.created_at).toLocaleString()}
+                            </h1>
+                            <h2 className="text-xs md:text-sm text-neutral-500 font-light">
+                                Última atualização
+                            </h2>
+                        </div>
+                        <div className="text-right">
+                            <h1 className="text-green-500 font-semibold text-xs md:text-base">{dolar?.data.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</h1>
+                            <h2 className="text-xs md:text-sm text-green-500 font-light">Câmbio referência</h2>
+                        </div>
                     </div>
                 </div>
                 <input

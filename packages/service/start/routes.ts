@@ -2,6 +2,7 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.resource('/products', 'ProductsController')
 Route.resource('/categories', 'CategoriesController')
+Route.get('/last-update', 'ProductsController.lastUpdate')
 
 Route.get('/dolar', 'TaxesController.getCurrentDolar')
 

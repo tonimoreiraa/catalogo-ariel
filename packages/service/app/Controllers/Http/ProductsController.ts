@@ -2,6 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Product from '../../Models/Product'
 import TaxesController from './TaxesController'
 import { bind } from '@adonisjs/route-model-binding'
+import CatalogUpdate from 'App/Models/CatalogUpdate'
 
 export default class ProductsController {
 
@@ -73,6 +74,15 @@ export default class ProductsController {
         }
 
         return {...product.serialize(), costs, costsByTax}
+    }
+
+    async lastUpdate()
+    {
+        const catalogUpdate = await CatalogUpdate.query()
+            .orderBy('created_at', 'desc')
+            .firstOrFail()
+
+        return catalogUpdate.serialize()
     }
 
 }
